@@ -1,24 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import PlatformToolbar from './components/platform-toolbar/platform-toolbar.tsx';
+import { Router, Switch, Route, Link } from 'react-router-dom/cjs/react-router-dom.js';
+import { createBrowserHistory } from 'history'
+import ContactView from './views/contact-view/contact-view.tsx';
+import logo from './logo.svg';
+import Homeview from './views/home-view/home-view.tsx';
+
 
 function App() {
+  const history = createBrowserHistory();
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    <Router history={history}>   
+       <div className="App">
+       <PlatformToolbar/>
+        <Switch>
+          <Route exact path="/">
+            <Homeview/>
+          </Route>
+          <Route path="/contact">
+            <ContactView/>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+
+
   );
 }
 
